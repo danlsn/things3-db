@@ -416,3 +416,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+/db/Things Database Backup 2022-02-21 (18).thingsdatabase/main.sqlite
+/db/Things Database Backup 2022-02-21 (18).thingsdatabase/main.sqlite-shm
+/db/Things Database Backup 2022-02-21 (18).thingsdatabase/main.sqlite-wal

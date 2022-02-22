@@ -97,7 +97,47 @@ from TMTask
          cross join TMTag on TTT.tags = TMTag.uuid
 where TMTag.title like '@Home'
 ```
+
 | task\_title | tag\_title |
 | :--- | :--- |
 | Download Govee Temperature Data | @Home |
 | Cut Your Hair | @Home |
+
+### 4. Breakdown of Tasks by Status
+
+```sqlite
+select count(*) 'Count',
+       case status
+           when '0' then 'Open'
+           when '2' then 'Cancelled'
+           when '3' then 'Completed'
+           end  'Status'
+from TMTask tasks
+where tasks.type not like '2' --type 2 are Headings
+group by status;
+```
+
+![](img/Graph_Tasks_by_Status.png)
+
+### 5. Breakdown of Tasks by Area
+
+```sqlite
+--Select All Tasks that belong to an Area
+select TMTask.title 'Title',
+       ta.title     'Area'
+from TMTask
+         cross join TMArea ta
+                    on TMTask.area = ta.uuid
+where area not null;
+
+--Group by Area & Return Count
+select ta.title 'Title',
+       count(*) 'Count'
+from TMTask
+         cross join TMArea ta on TMTask.area = ta.uuid
+where TMTask.area not null 
+group by ta.title
+order by Count desc;
+
+```
+![](img/Graph_Tasks_By_Area.png)
